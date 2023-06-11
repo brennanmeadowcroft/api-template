@@ -5,6 +5,8 @@ import { default as recipeRouter } from './recipes/routes';
 import errorHandler from './common/middleware/errorHandler';
 import config from './config';
 
+require('express-async-errors');
+
 const logger = new Logger({ logLevel: LOG_LEVELS.INFO });
 const app: Express = express();
 

@@ -9,13 +9,11 @@ type LogLevel = 'error' | 'warn' | 'info' | 'debug';
 
 export interface LoggerOptions {
   logLevel: LogLevel;
-  doc: string;
 }
 
 export default class Logger {
   private options: LoggerOptions = {
     logLevel: LOG_LEVELS.INFO,
-    doc: 'default',
   };
   private logInt: any = {
     error: 4,
@@ -23,9 +21,11 @@ export default class Logger {
     info: 2,
     debug: 1,
   };
+  private decorators: any = {};
 
-  constructor(options: any) {
+  constructor(options: LoggerOptions, decorators: any = {}) {
     this.options = { ...this.options, ...options };
+    this.decorators = { ...this.decorators, ...decorators };
   }
 
   private _shouldLog(type: string): boolean {
@@ -35,10 +35,15 @@ export default class Logger {
 
   private _log(type: string, message: string, attrs?: object) {
     if (this._shouldLog(type)) {
-      const msg = { type, message, ...attrs };
+      const msg = { type, message, metadata: { ...this.decorators, ...attrs } };
       console.log(msg);
     }
   }
+
+  public decorate(decorators: any) {
+    this.decorators = { ...this.decorators, ...decorators };
+  }
+
   public debug(message: string, attrs?: object) {
     this._log('debug', message, attrs);
   }

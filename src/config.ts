@@ -7,7 +7,7 @@ const config = appConfig({
   env: {
     default: 'local',
     env: 'NODE_ENV',
-    options: ['local', 'dev', 'prod'],
+    allowed: ['local', 'dev', 'prod'],
   },
   serverPort: {
     default: 3000,
@@ -16,7 +16,7 @@ const config = appConfig({
   logLevel: {
     default: 'info',
     env: 'LOG_LEVEL',
-    options: ['error', 'warn', 'info', 'debug'],
+    allowed: ['error', 'warn', 'info', 'debug'],
   },
   logRequests: {
     default: false,

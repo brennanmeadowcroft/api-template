@@ -1,11 +1,11 @@
 interface ConfigObject {
   default?: any;
   env: string;
-  options?: any[];
+  allowed?: string[];
 }
 
 interface ParentConfigObject {
-  [key: string]: ConfigObject;
+  [key: string]: ConfigObject | ParentConfigObject;
 }
 
 export default function appConfig(configObj: {
@@ -40,7 +40,7 @@ export default function appConfig(configObj: {
       return null;
     }
 
-    if (result && attr.options?.indexOf(result) === -1) {
+    if (result && attr.allowed?.indexOf(result) === -1) {
       throw new Error(
         `${result} is not one of the available options: ${attr.options}`
       );
