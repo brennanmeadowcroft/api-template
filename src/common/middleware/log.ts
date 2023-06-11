@@ -4,7 +4,9 @@ import Logger, { LoggerOptions } from '../utils/Logger';
 export function requestLogger(logger: Logger, logRequest = false) {
   return (req: Request, res: Response, next: NextFunction): void => {
     req.log = logger;
-    req.log.info(`[${req.method}] ${req.path}`, { params: req.params });
+    if (logRequest) {
+      req.log.info(`[${req.method}] ${req.path}`, { params: req.params });
+    }
     next();
   };
 }
