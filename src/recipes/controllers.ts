@@ -11,7 +11,7 @@ function RecipeController() {
   ) {
     req.log.info('Attempting to share recipe');
     const data = await Recipes(req.log, {}).get('1234');
-    res.status(200).send(data);
+    res.status(200).send({ data });
   }
 
   async function bad(req: Request, res: Response, next: NextFunction) {

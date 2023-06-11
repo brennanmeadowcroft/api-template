@@ -4,6 +4,7 @@ import RecipeController from './controllers';
 const router = Router();
 const controller = RecipeController();
 
-router.get('/share', controller.share);
+router.get('/good', controller.good);
+router.get('/bad', controller.bad);
 
 export default router;
